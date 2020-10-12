@@ -13,7 +13,7 @@ def extract_feat(filename):
     spectral_centroids = librosa.feature.spectral_centroid(signal, sr=smpl_rate)[0]
     spectral_rolloff = librosa.feature.spectral_rolloff(signal, sr=smpl_rate)[0]
     mfccs = librosa.feature.mfcc(signal, sr=smpl_rate)
-    print(mfccs.shape)
+    chromagram = librosa.feature.chroma_stft(signal, sr=smpl_rate, hop_length=512)  #TODO: Check hop_length
 
 
 
