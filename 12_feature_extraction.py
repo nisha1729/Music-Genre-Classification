@@ -63,7 +63,6 @@ if __name__ == "__main__":
                 # Add mean of all the features ready to be written to .csv file
                 feat = f'{file_nogaps} {np.mean(zcr)} {np.mean(sp_cent)} {np.mean(sp_roll)} ' \
                           f'{np.mean(chrom)} {np.mean(tmpo)} {np.mean(bts)}'
-                # print(feat)
 
                 # Add mean of mfcc for each dimension
                 for m in mfcc:
