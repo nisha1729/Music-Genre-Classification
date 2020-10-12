@@ -1,8 +1,11 @@
-##############
+#################
 # DSP Project
 # Ashima & Nisha
-##############
-# Problem 1.1 - Clips the adio files
+#################
+
+############################
+# 1.1 - Clips the adio files
+############################
 
 
 import os
