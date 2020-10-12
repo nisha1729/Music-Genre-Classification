@@ -1,5 +1,5 @@
 ######################
-# 1.2 Fearure Extraction
+# 1.2 Feature Extraction
 ######################
 
 
@@ -52,15 +52,17 @@ if __name__ == "__main__":
         genres = 'Dark_Forest Full-on Goa Hi_Tech'.split()
 
         for g in genres:
-            print(os.path.join(path + "/" + g + '_New'))
             for filename in os.listdir(os.path.join(path + "/" + g + '_New')):
 
                 filename_ = os.path.join(path + "/" + g + '_New/' + filename)
+
+                # Remove gaps for ease of separation while writing to .csv
                 file_nogaps = filename.replace(" ", "")
 
+                # Extract the features
                 zcr, sp_cent, sp_roll, mfcc, chrom, tmpo, bts = extract_feat(filename_)
 
-                # Add mean of all the features ready to be written to .csv file
+                # Combine the mean of all the features ready to be written to .csv file
                 feat = f'{file_nogaps} {np.mean(zcr)} {np.mean(sp_cent)} {np.mean(sp_roll)} ' \
                           f'{np.mean(chrom)} {np.mean(tmpo)} {np.mean(bts)}'
 
@@ -71,11 +73,13 @@ if __name__ == "__main__":
                 # Add genre label
                 feat += f' {g}'
 
-                with open('features.csv', 'w', newline='') as file_:
-                    writer = csv.writer(file_)
-                    print(feat)
+                file.close()  # Important to close the file in write mode
+                # before opening in read mode
+
+                with open('features.csv', 'a', newline='') as file_:
+                    writer = csv.writer(file_, quoting = csv.QUOTE_NONE)
                     writer.writerow(feat.split())
-                    sys.exit(0)
+                    file_.close()  # Improtant to close file before reopening
 
 
 
