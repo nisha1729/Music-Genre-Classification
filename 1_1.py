@@ -9,6 +9,7 @@
 
 
 import os
+import sys
 
 # Audio clipping for 30 sec
 from pydub import AudioSegment
@@ -42,7 +43,9 @@ def clipAudio(folderNam):
             # Iterate through all the chunks of each file
             for i, chunk in enumerate(chunks):
                 chunk_name = "chunk{0}.wav".format(i)
-                chunk_file_name = os.path.join(file_name + '_' + chunk_name)
+
+                # remove .wav and add _chunk{0}
+                chunk_file_name = os.path.join(file_name[:-4] + '_' + chunk_name)
                 print(chunk_file_name)
 
                 # Export each chunk as .wav file
@@ -54,4 +57,4 @@ if __name__ == "__main__":
     clipAudio('dataset/Dark_Forest')
     clipAudio('dataset/Full-On')
     clipAudio('dataset/Goa')
-    clipAudio('dataset/Hi-Tech')
+    clipAudio('dataset/Hi_Tech')
