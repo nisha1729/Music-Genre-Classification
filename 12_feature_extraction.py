@@ -9,6 +9,7 @@ import csv
 import os
 import numpy as np
 import sys
+from tqdm import tqdm
 
 
 def extract_feat(filename):
@@ -52,11 +53,12 @@ if __name__ == "__main__":
         genres = 'Dark_Forest Full-on Goa Hi_Tech'.split()
 
         for g in genres:
-            for filename in os.listdir(os.path.join(path + "/" + g + '_New')):
+            for filename in tqdm(os.listdir(os.path.join(path + "/" + g + '_New'))):
 
+                # Full path to file
                 filename_ = os.path.join(path + "/" + g + '_New/' + filename)
 
-                # Remove gaps for ease of separation while writing to .csv
+                # Remove gaps in filename for ease of separation while writing to .csv
                 file_nogaps = filename.replace(" ", "")
 
                 # Extract the features
@@ -77,9 +79,9 @@ if __name__ == "__main__":
                 # before opening in read mode
 
                 with open('features.csv', 'a', newline='') as file_:
-                    writer = csv.writer(file_, quoting = csv.QUOTE_NONE)
+                    writer = csv.writer(file_)
                     writer.writerow(feat.split())
-                    file_.close()  # Improtant to close file before reopening
+                    file_.close()  # Important to close file before reopening
 
 
 
