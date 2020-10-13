@@ -74,11 +74,12 @@ def kalman_tempo_beat(filename):
     tempo, beats = librosa.beat.beat_track(y=signal, sr=smpl_rate)
     return tempo, beats
 
+
 if __name__ == "__main__":
-    # extract_feat('dataset_clips/Dark_Forest_New/03 - Dohm & Schizoid Bears - Modulation Manipulation.wav_chunk0.wav')
     path = 'dataset_clips'
     show = False     # Set to true for graphs
-    #Generate header for .csv file
+
+    # Generate header for .csv file
     header = 'filename  zero_crossing_rate spectral_centroid sprectral_rolloff chroma_stft tempo beat'
     for i in range(1, 21):
         header += f' mfcc{i}'
