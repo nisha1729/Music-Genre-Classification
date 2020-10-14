@@ -12,6 +12,7 @@ def data_process():
 
     feat = pd.read_csv('extracted_features.csv')
     feat = feat.drop(['filename'],axis=1)   # Remove irrelevant features
+    feat = feat.iloc[:-1, :]                # Remove last NaN line
     genre_list = feat.iloc[:, -1]           # Extract genre list
 
     # Encode string labels as numbers
