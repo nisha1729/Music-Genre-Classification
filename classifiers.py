@@ -58,7 +58,6 @@ def make_ellipses(gmm, ax):
 
 
 
-
 def GaussMM():
     classifiers = dict((covar_type, GaussianMixture(n_components=4,
                         covariance_type=covar_type, verbose_interval=10))
