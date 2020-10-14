@@ -9,7 +9,6 @@
 
 
 import os
-import sys
 
 # Audio clipping for 30 sec
 from pydub import AudioSegment

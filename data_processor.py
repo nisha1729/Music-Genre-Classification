@@ -31,3 +31,4 @@ def data_process():
 
 if __name__ == '__main__':
     X_train, X_test, y_train, y_test = data_process()
+    print(X_train.shape)

@@ -2,12 +2,11 @@
 # 2.1 kNN
 #################
 # reference: https://scikit-learn.org/0.15/auto_examples/mixture/plot_gmm_classifier.html
-# https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_covariances.html
+# https://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html
 
 
 from data_processor import *
 import numpy as np
-import sys
 import sklearn.neighbors
 from sklearn.metrics import accuracy_score
 import sklearn.neighbors
@@ -20,6 +19,7 @@ from sklearn.feature_selection import f_classif
 feat_name = ['zero_crossing_rate', 'spectral_centroid', 'sprectral_rolloff', 'chroma_stft', 'tempo', 'beat']
 for i in range(1, 21):
     feat_name.append(f' mfcc{i}')
+
 
 def kNN():
     model = sklearn.neighbors.KNeighborsClassifier()
@@ -55,7 +55,6 @@ def make_ellipses(gmm, ax):
         ell.set_alpha(0.5)
         ax.add_artist(ell)
         ax.set_aspect('equal', 'datalim')
-
 
 
 def GaussMM():
@@ -115,4 +114,4 @@ if __name__ == '__main__':
     visualise = False
     X_train, X_test, y_train, y_test = data_process()
     kNN()       # kNN + best feature selection
-    GaussMM()   # Gaussain Mixture Model + best feat selection
+    GaussMM()   # Gaussian Mixture Model + best feat selection

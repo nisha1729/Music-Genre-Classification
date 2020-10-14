@@ -11,6 +11,7 @@ from pydub import AudioSegment
 from torch.utils.data import Dataset
 from torchsummary import summary
 from sklearn.preprocessing import LabelEncoder
+from scipy.io.wavfile import read
 
 
 folderNam = 'dataset_clips'
@@ -27,9 +28,9 @@ class AudioLoader(Dataset):
                            'Full-On'    :1,
                            'Goa'        :2,
                            'Hi_Tech'    :3}
+
         for dirpath, dirnames, files in os.walk(dataset_path):
             print(f'Found directory: {dirpath}')
-
             for file_name in files:
                 self.audio_list.append(os.path.join(dirpath, file_name))
 
@@ -37,7 +38,9 @@ class AudioLoader(Dataset):
         return len(self.audio_list)
 
     def __getitem__(self, idx):
-        audio = np.array((AudioSegment.from_file((os.path.join(self.audio_list[idx])), 'wav')))
+        # print(self.audio_list[idx])
+        audio = read((self.audio_list[idx]))
+        print('audio', audio.shape)
         label = self.label_dict[os.path.dirname(self.audio_list[idx]).split('\\')[1][:-4]]
         return audio, label
 
@@ -84,15 +87,11 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=
 # Train the model
 lr = learning_rate
 total_step = len(train_loader)
-print(total_step)
 for epoch in range(num_epochs):
-    print(epoch)
     for i, data in enumerate(train_loader):
-        print('1')
         (audio, labels) = data
-        print(labels)
 #         # print(labels)
-#         sys.exit(0)
+        sys.exit(0)
 #
 #         # Forward pass
 #         outputs = model(audio)
