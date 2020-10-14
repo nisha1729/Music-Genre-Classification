@@ -103,7 +103,6 @@ if __name__ == "__main__":
 
                 # Extract the features
                 zcr, sp_cent, sp_roll, mfcc, chrom, tmpo, bts = extract_feat(filename_)
-                sys.exit(0)
 
                 # Combine the mean of all the features ready to be written to .csv file
                 feat = f'{file_nogaps} {np.mean(zcr)} {np.mean(sp_cent)} {np.mean(sp_roll)} ' \
