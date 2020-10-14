@@ -1,6 +1,6 @@
 
 
-
+from tqdm import tqdm
 from data_processor import *
 import os
 import sys
@@ -17,9 +17,8 @@ from scipy.io.wavfile import read
 folderNam = 'dataset_clips'
 batch_size = 5
 learning_rate = 0.1
-reg = 0.1
-num_epochs = 10
-
+reg = 0.001
+num_epochs = 500
 
 
 class CNN_features(nn.Module):
@@ -37,11 +36,6 @@ class CNN_features(nn.Module):
             # nn.BatchNorm1d(20),
             nn.ReLU(inplace=True),
             nn.MaxPool1d(kernel_size=2, stride=2)
-            # Defining another 2D convolution layer
-            # nn.Conv1d(20, 30, kernel_size=3),
-            # nn.BatchNorm1d(4),
-            # nn.ReLU(inplace=True)
-            # nn.MaxPool1d(kernel_size=2, stride=2)
         )
 
         self.linear_layers = nn.Sequential(
@@ -70,8 +64,9 @@ y_train = torch.from_numpy(y_train).long()
 # Train the model
 lr = learning_rate
 total_step = len(X_train)
-for epoch in range(num_epochs):
-    print(summary(model, X_train))
+print(summary(model, X_train))
+
+for epoch in tqdm(range(num_epochs)):
     # Forward pass
     outputs = model(X_train)
     loss = criterion(outputs, y_train)
@@ -81,10 +76,18 @@ for epoch in range(num_epochs):
     loss.backward()
     optimizer.step()
 
+    if epoch%100 == 0:
+        # Calculate training accuracy
+        total = len(y_train)
+        _, predicted = torch.max(outputs.data, 1)
+        correct = int(sum(predicted == y_train))
+
+        print('Training Accuracy ', (100 * correct / total))
+
+
 # Test the model
 with torch.no_grad():
     total = np.size(y_test)
-    print(total)
     y_test = torch.from_numpy(y_test).float()
     X_test = torch.from_numpy(X_test).float()
     X_test = X_test.reshape(X_test.shape[0], 1, X_test.shape[1])
@@ -92,6 +95,5 @@ with torch.no_grad():
     outputs = model(X_test)
     _, predicted = torch.max(outputs.data, 1)
     correct = int(sum(predicted == y_test))
-    print(correct)
 
-    print('Accuracy ', (100 * correct / total))
+    print('>>> Test Accuracy ', (100 * correct / total))
