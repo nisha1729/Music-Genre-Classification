@@ -12,10 +12,10 @@ from torchsummary import summary
 from scipy.io.wavfile import read
 
 folderNam = 'dataset_clips'
-batch_size = 100
-learning_rate = 2e-4
-reg = 0.01
-num_epochs = 10
+batch_size = 20
+learning_rate = 0.1
+reg = 0.001
+num_epochs = 100
 
 
 # Data loader class
