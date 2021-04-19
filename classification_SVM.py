@@ -1,7 +1,3 @@
-#####################
-# 2.3 Research - SVM
-#####################
-
 from data_processor import *
 from sklearn import svm
 from sklearn.metrics import accuracy_score
