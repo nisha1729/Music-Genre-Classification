@@ -1,6 +1,3 @@
-#################
-# 2.1 kNN
-#################
 # reference: https://scikit-learn.org/0.15/auto_examples/mixture/plot_gmm_classifier.html
 # https://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html
 
