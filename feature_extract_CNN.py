@@ -1,7 +1,3 @@
-###################
-# 1.2.2 Feature Extraction - Research
-########################################
-
 import os
 import sys
 import torch
