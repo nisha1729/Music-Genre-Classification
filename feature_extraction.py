@@ -1,8 +1,3 @@
-######################
-# 1.2 Feature Extraction
-######################
-
-
 import librosa
 import sklearn
 import csv
